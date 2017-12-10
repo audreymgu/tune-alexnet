@@ -15,7 +15,8 @@ IMAGENET_MEAN = tf.constant([123.68, 116.779, 103.939], dtype=tf.float32)
 
 
 class ImageDataGenerator(object):
-    """Wrapper class around the new Tensorflows dataset pipeline.
+    """
+    Wrapper class around the new Tensorflows dataset pipeline.
 
     Requires Tensorflow >= version 1.12rc0
     """
@@ -25,8 +26,8 @@ class ImageDataGenerator(object):
         """Create a new ImageDataGenerator.
 
         Recieves a path string to a text file, which consists of many lines,
-        where each line has first a path string to an image and seperated by
-        a space an integer, referring to the class number. Using this data,
+        where each line has a path string to an image and - seperated by
+        a space - an integer, referring to the class number. Using this data,
         this class will create TensrFlow datasets, that can be used to train
         e.g. a convolutional neural network.
 
