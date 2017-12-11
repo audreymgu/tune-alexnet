@@ -157,8 +157,9 @@ td img {
 <p>Furthermore, as far as roles are concerned, most of the number crunching and CPU running was done on George's computer. Their setup was better equipped to handle 
 	the amount of data that we needed to train AlexNet on. Much of understanding AlexNet and how to use the repository to suit our needs was communicated over Facebook 
 	messenger. We worked on that portion together (cloning, debugging, using git as intended in its teamwork capacity). The report will also be a mixture of both our findings 
-	and understanding of the material. 
-</p>
+	and understanding of the material, but Yan primarily wrote the material.</p> 
+
+<p>Additional roles that we undertook throughout this project will be discussed throughout the report. </p>
 
 <div style="clear:both">
 <h3>Understanding Deep Convolutional Networks</h3>
@@ -184,43 +185,29 @@ td img {
 <p> Our results were tested on 9 images! Not so surprisingly, AlexNet was able to identify the images accurately for 5/9 images (3 true positives, 2 false positives), as seen below, where food is 
 	labelled appropriately and dogs are labelled appropriately. The algorithm failed to notice the Corgi in the hot dog costume as well as the Dachscund in the hot dog costume. It also miscategorized the 
 	very left image as a dog, when it's actually hot dogs. For the most part, though, the algorithm did a good job in identifying the images, likely because of the fact that AlexNet was already pretrained on
-	images of dogs and hotdogs, but it was likely just introduced to dogs in costumes.</p>
+	images of dogs and hotdogs, but it was likely just introduced to dogs in costumes. Perhaps with a larger dataset to train AlexNet on, we could arrive to be <em>more</em> reliant results, but a success rate of
+	a little over 50% is not bad for the given dataset. </p>
 	<img src="images/results/hotdogordog.png" width="900"/>
 
 <h3>Tuning AlexNet Pt. 2</h3>
-<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-		eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p> After finetuning AlexNet to our dog/hotdog dataset, we were required to train the neural network on another set of data. We chose the dataset called Caltech101, which is linked below in the results (if you'd like
+	to learn more about the contents of the dataset). This was significantly smaller than the dataset that we were linked to (CIFAR) and, given our computational power and prowess in writing scripts that would automate the <code>.txt</code>
+	file creation, it was in our favor to pick a smaller dataset. Nonetheless, Caltech 101 consists of 101 classes with approximately 50 or so images per class, at variable resolution. Some classes have more images than others, airplanes, 
+	for example, have over 700. This dataset was created by Fei Fei Li. Furthermore, CIFAR was stored in a format that was unfamiliar with both of us and would require more time than we could afford in order to tackle the problem. Combined with
+	the breadth of the dataset and the datatype, it was better to go with CIFAR. As the algorithm that we are using requires a <code>.txt</code> file, George wrote a script that would automate the process and would give us two files to work with in the end
+	<em>with</em> the proper labels. What this entails is parsing through the files to find the filepaths and to match the images accordingly based on the parsing to have a file containing training images and validation images.</p>
 
 <h3>Results: <a href="http://www.vision.caltech.edu/Image_Datasets/Caltech101/">Caltech 101 Dataset</a></h3>
 <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
 	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
 	eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-<table border=1>
-<tr>
-<td>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg"  width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-</td>
-</tr>
-
-<tr>
-<td>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg"  width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-</td>
-</tr>
-
-</table>
-
 <div style="clear:both" >
 <h3>Final Thoughts</h3>
-	<p> 	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
+<p> For a final project, this was interesting! We were able to properly problem solve our way through understanding and using the repository that was provided to us. We were also able to effectively use git and GitHub as a means of collaboration and used Facebook 
+	in order to communicate when we made changes so that we could pull said changes down from GitHub. For the future, it would be nice to dive deeper into convlutional networks and in understanding the algorithm in-depth, and perhaps that can be done through an artifiical 
+	intelligence class. Nonetheless, it is quite impressive that AlexNet was able to analyze images the way that it did and at an impeccable accuracy as well.  
+
+</p>
 </body>
 </html>
