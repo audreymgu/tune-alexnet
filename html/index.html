@@ -167,7 +167,8 @@ td img {
 	AlexNet in particular is supervised deep learning, meaning that we are providing the network a training dataset, a validation dataset, and a testing dataset (70-15-15 breakup, if possible). 
 	The network takes the training dataset, processes it, and validates it against the validation set. The testing set should be images that the network has never seen before in order to properly test 
 	the network. For our particular setup, we have a pretrained network that already has weights associated with it. We will now discuss finetuning AlexNet to our new datasets from the Professor (dog vs hotdog) 
-	and from ImageNet.  </p>
+	and from ImageNet.  To properly run AlexNet (and virtually any deep convolutional network), there requires checkpoints that are determined as we process images through the network's layers. These will likely 
+	not be put into the final zip folder of our project as the files would be rather large and hosting that on GitHub would be taxing on anyone who would pull the project down. </p>
 
 <h3>Tuning AlexNet Pt. 1</h3>
 <p> Finetuning AlexNet, thankfully, was not a challenge but did require some work in modifying the code to suit our needs, especially with the first set of images being only 58 images total. 
@@ -192,11 +193,86 @@ td img {
 	for example, have over 700. This dataset was created by Fei Fei Li. Furthermore, CIFAR was stored in a format that was unfamiliar with both of us and would require more time than we could afford in order to tackle the problem. Combined with
 	the breadth of the dataset and the datatype, it was better to go with Caltech 101. As the algorithm that we are using requires a <code>.txt</code> file, George wrote a script that would automate the process and would give us two files to work with in the end
 	<em>with</em> the proper labels. What this entails is parsing through the files to find the filepaths and to match the images accordingly based on the parsing to have a file containing training images and validation images.</p>
+	<p>See below for the script that George wrote to obtain the path to the file and the appropriate labels.</p> 
+	<pre><code>import os
+		
+		def list_files(dir):
+		  r = []
+		  i = 0
+		  dir_list = [x[0] for x in os.walk(dir)]
+		  dir_list = sorted(dir_list, key=str.lower)
+		  dir_list.pop(0)
+		  for subdir in dir_list:
+			folder_list = []  
+			files = os.walk(subdir).next()[2]                                                                             
+			if (len(files) > 0):                                                                                          
+				for file in files:                                                                                        
+					folder_list.append(subdir + '/' + file + ' ' + str(i))
+			i += 1
+			r.append(folder_list)
+		  return r
+		
+		# Create master file list
+		master_list = list_files('data/101_obj')
+		
+		# Create sublists
+		tr_list = []
+		va_list = []
+		te_list = []
+		
+		for sublist in master_list:
+		  # Training List
+		  tr_portion = sublist[:int(len(sublist)*.7)]
+		  for item in tr_portion:
+			tr_list.append(item)
+		  # Validation List
+		  va_portion = sublist[int(len(sublist)*.7):int(len(sublist)*.85)]
+		  for item in va_portion:
+			va_list.append(item)
+			
+		for sublist in master_list:
+		  # Test List
+		  for item in sublist:
+			if not item in tr_list and not item in va_list:
+			  te_list.append(item)
+		  
+		# Print file lists
+		# print master_list
+		# print tr_list
+		# print va_list
+		
+		# Create new text files
+		tr_text = open("@tr_list.txt","w+")
+		va_text = open("@va_list.txt","w+")
+		te_text = open("@te_list.txt","w+")
+		
+		# Write to file lists
+		for item in tr_list:
+		  tr_text.write('%s\n' % (item))
+		for item in va_list:
+		  va_text.write('%s\n' % (item))
+		for item in te_list:
+		  te_text.write('%s\n' % (item))
+		  
+		# Close text files
+		tr_text.close()
+		va_text.close()
+		te_text.close()</code></pre>
 
 <h3>Results: <a href="http://www.vision.caltech.edu/Image_Datasets/Caltech101/">Caltech 101 Dataset</a></h3>
-<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-	eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p> 
+	Like before, there was an observation of increasing validation accuracy as AlexNet is trained on the given dataset that was 
+	provided. AlexNet may or may not have already been trained on these images, but it would be interesting to see what comes out of it 
+	after splitting the files in relatively the same distribution as we did for the hot dogs vs dogs. 
+</p>
+	<img src="images/results/caltech101.png" width="900"/>
+<p>
+	And check out those results! These images were randomly picked from the testing pool and evaluated. We can see that AlexNet had 6/9, or 2/3. There were six true positives 
+	and 3 false positives. That is incredibly good in terms of the return rate, which is to be expected from AlexNet! Furthermore, it's interesting that the first image in the first row 
+	was determined as pizza with half confidence. This is likely due to the red lining and the greenness of the image, along with the shape of the brain closely resembling a triangular slice of 
+	pizza. The last image in the final row is a silver dragonfly pendant, and the fossil that it refers to looks incredibly like it (plus, 30% confidence also indicates that the algorithm was also unclear).
+	Overall, the algorithm did a phenomenal job with identifying the objects in the images. 
+</p>
 
 <div style="clear:both" >
 <h3>Final Thoughts</h3>
