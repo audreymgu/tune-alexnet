@@ -45,12 +45,12 @@ for sublist in master_list:
 # print tr_list
 # print va_list
 
-# Create a new text file
+# Create new text files
 tr_text = open("@tr_list.txt","w+")
 va_text = open("@va_list.txt","w+")
 te_text = open("@te_list.txt","w+")
 
-# Write in file list
+# Write to file lists
 for item in tr_list:
   tr_text.write('%s\n' % (item))
 for item in va_list:
@@ -58,7 +58,7 @@ for item in va_list:
 for item in te_list:
   te_text.write('%s\n' % (item))
   
-# Close text file
+# Close text files
 tr_text.close()
 va_text.close()
 te_text.close()
