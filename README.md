@@ -1,5 +1,9 @@
 ![](https://zenodo.org/badge/DOI/10.5281/zenodo.1037359.svg)
 
+# Notes
+
+This neural network is a fork of Frederik Kratzert's implementation of Alexnet in Tensorflow. It has been configured for training on the two included data sets. Original commentary from Kratzert below.
+
 # Finetune AlexNet with Tensorflow
 
 **Update 15.06.2016**
