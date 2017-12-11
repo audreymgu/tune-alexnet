@@ -1,2 +1,1 @@
-class_names = '''dog
-food'''.split("\n")
+class_names = '''dog, food'''.split(", ")
