@@ -138,8 +138,11 @@ td img {
 <h2>Final Project: Understanding Deep Convolutional Networks</h2>
 
 <div style="float: right; padding: 20px">
-<img src="placeholder.jpg" />
-<p style="font-size: 14px">Example of a right floating element.</p>
+<img src="images/deeplearning.png" />
+<p style="font-size: 14px">The architecture of AlexNet, 
+	<a href="https://papers.nips.cc/paper/4824-imagenet-
+	classification-with-deep-convolutional-neural-networks.pdf">
+	as shown in the original paper.</a></p>
 </div>
 
 <p>
@@ -150,54 +153,46 @@ td img {
 <p> If you would like to see our (George and Yan's) repository, then please <a href="https://github.com/georgezgu/tune-alexnet">refer to the link here. </a>
 	We forked and adapted the code from kratzert's repository based on our needs and requirements. Overall, this was a fun, quick project to do in order to 
 	understand how convolutional networks function! </p>
+<h3>Roles</h3>
+<p>Furthermore, as far as roles are concerned, most of the number crunching and CPU running was done on George's computer. Their setup was better equipped to handle 
+	the amount of data that we needed to train AlexNet on. Much of understanding AlexNet and how to use the repository to suit our needs was communicated over Facebook 
+	messenger. We worked on that portion together (cloning, debugging, using git as intended in its teamwork capacity). The report will also be a mixture of both our findings 
+	and understanding of the material. 
+</p>
 
 <div style="clear:both">
-<h3>Understanding Convolutional Networks</h3>
+<h3>Understanding Deep Convolutional Networks</h3>
+<p>Deep convolutional neural networks (CNNs) are full of layers that are used to process information, specifically images in our case, to do some analysis. 
+	Our architecture of the AlexNet contains eight learned layers--five convolutional and three fully-connected layers. See the above image to understand how data 
+	is processed throuhgout the system. CNNs share weights in convolutional layers, which means that the same filter is used in each field and improves performance overall. 
+	All of the processes should ideally happen on the GPU, as it is faster, but in some cases will need to be done on the CPU depending on the OS of the system being used 
+	(in our case, our processing happened on the CPU). If the dataset is small enough, the time it takes to run on the CPU is negilible. However, bigger datasets will require more machinepower. 
+	AlexNet in particular is supervised deep learning, meaning that we are providing the network a training dataset, a validation dataset, and a testing dataset (70-15-15 breakup, if possible). 
+	The network takes the training dataset, processes it, and validates it against the validation set. The testing set should be images that the network has never seen before in order to properly test 
+	the network. For our particular setup, we have a pretrained network that already has weights associated with it. We will now discuss finetuning AlexNet to our new datasets from the Professor (dog vs hotdog) 
+	and from ImageNet.  </p>
+
+<h3>Tuning AlexNet Pt. 1</h3>
+<p> Finetuning AlexNet, thankfully, was not a challenge but did require some work in modifying the code to suit our needs, especially with the first set of images being only 58 images total. 
+	The small batch required us to consider parts of the code as George attempted to run parts of it. We had to adjust the <code>learning params</code> in <code>finetune.py</code>. We adjusted our <code>batch_size</code>
+	as 8 to avoid hitting division by zero errors. We also took away one of the <code>train_layers</code> that we wanted to look at and focused primarily on the last two, fc8 and fc7. We kept the rest of the code the same 
+	and then made our <code>.txt</code> files to include the paths to our training and validation images, respectively. We classified dogs as 1s and hot dogs (and food related items) as 0. There were several images 
+	provided to us where the dogs were also in hot dog costumes. 
+</p>
+
+<h3>Results: Hot Dog or Just Dog?</h3>
+<p> Our results were tested on 9 images! Not so surprisingly, AlexNet was able to identify the images accurately for 5/9 images (3 true positives, 2 false positives), as seen below, where food is 
+	labelled appropriately and dogs are labelled appropriately. The algorithm failed to notice the Corgi in the hot dog costume as well as the Dachscund in the hot dog costume. It also miscategorized the 
+	very left image as a dog, when it's actually hot dogs. For the most part, though, the algorithm did a good job in identifying the images, likely because of the fact that AlexNet was already pretrained on
+	images of dogs and hotdogs, but it was likely just introduced to dogs in costumes.</p>
+	<img src="images/results/hotdogordog.png" width="900"/>
+
+<h3>Tuning AlexNet Pt. 2</h3>
 <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
 		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
 		eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-<h3>Tuning AlexNet</h3>
-<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-	eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	<pre><code>
-			%example code
-			for i = 1:length(offset)
-				source = imread(sprintf('%s/source_%02d.jpg',data_dir,i));
-				mask   = imread(sprintf('%s/mask_%02d.jpg',data_dir,i));
-				target = imread(sprintf('%s/target_%02d.jpg',data_dir,i));
-			
-			</code></pre>
-
-<h3>Results: Hot Dog or Just Dog?</h3>
-<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-	eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<table border=1>
-<tr>
-<td>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg"  width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-</td>
-</tr>
-
-<tr>
-<td>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg"  width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-<img src="placeholder.jpg" width="24%"/>
-</td>
-</tr>
-
-</table>
-
-
-<h3>Results: CIFAR-10 Dataset</h3>
+<h3>Results: <a href="http://www.vision.caltech.edu/Image_Datasets/Caltech101/">Caltech 101 Dataset</a></h3>
 <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
 	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
 	eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
