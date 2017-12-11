@@ -47,8 +47,8 @@ train_layers = ['fc8', 'fc7']
 display_step = 20
 
 # Path for tf.summary.FileWriter and to store model checkpoints
-filewriter_path = "../data/1o_tensorboard"
-checkpoint_path = "../data/1o_checkpoints"
+filewriter_path = "../data/ob_tensorboard"
+checkpoint_path = "../data/ob_checkpoints"
 
 """
 Main Part of the finetuning Script.
