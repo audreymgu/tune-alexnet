@@ -2,7 +2,7 @@
 
 # Notes
 
-This neural network is a fork of Frederik Kratzert's implementation of Alexnet in Tensorflow. It has been configured for training on the two included data sets. Original commentary from Kratzert below; please note, however, that a number of aspects of the discussion below are outdated as a result of alterations to the structure of the repository. For example, there is no longer a 'finetune.py' nor 'caffe_classes.py;' instead, there are specific tuning scripts and class containers for each dataset. This repository was run using tensorflow-cpu 1.4.0.
+This neural network is a fork of Frederik Kratzert's implementation of Alexnet in Tensorflow. It has been configured for training on the two included data sets. Original commentary from Kratzert below; please note, however, that a number of aspects of the discussion below are outdated as a result of alterations to the structure of the repository. There is no longer a 'finetune.py' nor 'caffe_classes.py;' instead, there are specific tuning scripts and class containers for each dataset, with a two-letter prefix indicating which set each belongs to. The **hd** prefix refers to the "hot dog" dataset, while **ob** refers to the 101 Objects dataset. Checkpoints and tensorboard information are also respectively sorted by dataset under **data/**. As with the original repository, pretrained weights will need to be downloaded in order for this implementation to be run; however, note that this file should be placed in **data/** as opposed to the root directory. This repository was run using tensorflow-cpu 1.4.0.
 
 # Finetune AlexNet with Tensorflow
 
