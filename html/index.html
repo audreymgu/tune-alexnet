@@ -167,8 +167,7 @@ td img {
 	AlexNet in particular is supervised deep learning, meaning that we are providing the network a training dataset, a validation dataset, and a testing dataset (70-15-15 breakup, if possible). 
 	The network takes the training dataset, processes it, and validates it against the validation set. The testing set should be images that the network has never seen before in order to properly test 
 	the network. For our particular setup, we have a pretrained network that already has weights associated with it. We will now discuss finetuning AlexNet to our new datasets from the Professor (dog vs hotdog) 
-	and from ImageNet.  To properly run AlexNet (and virtually any deep convolutional network), there requires checkpoints that are determined as we process images through the network's layers. These will likely 
-	not be put into the final zip folder of our project as the files would be rather large and hosting that on GitHub would be taxing on anyone who would pull the project down. </p>
+	and from ImageNet.  Note that, in order to observe the tuned results of this neural network, training information must first be generated; the training data used for the tuned implementations discussed has not been included in this repository due to size limitations. This can be done by running <code>hd_tuner.py</code> and <code>ob_tuner.py</code>, respectively.</p>
 
 <h3>Tuning AlexNet Pt. 1</h3>
 <p> Finetuning AlexNet, thankfully, was not a challenge but did require some work in modifying the code to suit our needs, especially with the first set of images being only 58 images total. 
@@ -192,7 +191,7 @@ td img {
 	file creation, it was in our favor to pick a smaller dataset. Nonetheless, Caltech 101 consists of 101 classes with approximately 50 or so images per class, at variable resolution. Some classes have more images than others, airplanes, 
 	for example, have over 700. This dataset was created by Fei Fei Li. Furthermore, CIFAR was stored in a format that was unfamiliar with both of us and would require more time than we could afford in order to tackle the problem. Combined with
 	the breadth of the dataset and the datatype, it was better to go with Caltech 101. As the algorithm that we are using requires a <code>.txt</code> file, George wrote a script that would automate the process and would give us two files to work with in the end
-	<em>with</em> the proper labels. What this entails is parsing through the files to find the filepaths and to match the images accordingly based on the parsing to have a file containing training images and validation images.</p>
+	with the proper labels. What this entails is parsing through the files to find the filepaths and to match the images accordingly based on the parsing to have a file containing training images and validation images.</p>
 	<p>See below for the script that George wrote to obtain the path to the file and the appropriate labels.</p> 
 	<pre><code>import os
 		
